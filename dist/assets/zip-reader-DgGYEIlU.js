@@ -1,0 +1,1 @@
+export{F as ZipReader,I as getEntryDataDescriptorLength}from"./zip-core-custom-kGg98tZt.js";

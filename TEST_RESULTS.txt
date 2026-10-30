@@ -1,0 +1,76 @@
+
+> local-heic-converter@1.0.0 build
+> tsc --noEmit && vite build && node scripts/notices.mjs
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 62 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.52 kB │ gzip:  0.36 kB
+dist/assets/convert.worker-BeLPFj12.js       0.54 kB
+dist/assets/adapter-BfQOyVgH.js              2.30 kB
+dist/assets/heic-to-DcxrCQr7.js          3,224.43 kB
+dist/assets/index-BqFJP_Rd.css               9.11 kB │ gzip:  2.80 kB
+dist/assets/zip-reader-DgGYEIlU.js           0.09 kB │ gzip:  0.10 kB
+dist/assets/zip-core-custom-kGg98tZt.js     96.79 kB │ gzip: 33.98 kB
+dist/assets/index-BdEYs_x_.js              242.68 kB │ gzip: 76.76 kB
+
+✓ built in 445ms
+
+> local-heic-converter@1.0.0 lint
+> eslint .
+
+
+> local-heic-converter@1.0.0 test
+> vitest run && node --test tests/server.test.mjs tests/browser-opener.test.mjs
+
+
+ RUN  v5.0.5 /workspace/heic_converter
+
+
+ Test Files  5 passed (5)
+      Tests  34 passed (34)
+   Start at  09:40:30
+   Duration  1.98s (environment 46%, tests 30%, import 15%, transform 6%, worker 3%)
+
+    Isolate  5 workers spawned · ~401ms startup each (spawn + environment, per file)
+             at least ~602ms faster with isolate: false — reuses workers across files instead of one per file
+
+✔ ошибка открытия браузера не останавливает сервер; процесс открытия завершается при SIGINT (370.382072ms)
+✔ аргументы не позволяют менять host и проверяют порт (4.091303ms)
+✔ сервер: loopback, Host, методы, MIME, traversal и symlink (75.979151ms)
+✔ проверка версии Node выдаёт понятную ошибку (8.033424ms)
+✔ запуск без node_modules из пути с пробелами/кириллицей, занятый порт и SIGINT (4533.878456ms)
+✔ отсутствие dist, Node.js и npm: объяснение без скрытой установки (185.885006ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5484.413812
+
+> local-heic-converter@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:10838) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 10 tests using 1 worker
+
+(node:10859) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/e2e/converter.spec.ts:49:1 › чистый профиль, без внешней сети: первый Worker, JPEG, PNG, скачивание и ZIP (5.8s)
+  ✓   2 tests/e2e/converter.spec.ts:89:3 › JPEG: портрет, зеркало и основное изображение, а не первый кадр (5.4s)
+  ✓   3 tests/e2e/converter.spec.ts:99:3 › JPEG: alpha и удаление исходных EXIF/GPS/XMP (3.8s)
+  ✓   4 tests/e2e/converter.spec.ts:89:3 › PNG: портрет, зеркало и основное изображение, а не первый кадр (4.9s)
+  ✓   5 tests/e2e/converter.spec.ts:99:3 › PNG: alpha и удаление исходных EXIF/GPS/XMP (3.8s)
+  ✓   6 tests/e2e/converter.spec.ts:124:1 › частичный успех, русские и совпадающие имена, ZIP с точными данными (6.3s)
+  ✓   7 tests/e2e/converter.spec.ts:148:1 › качество JPEG действует функционально; старые результаты явно подписаны (8.0s)
+  ✓   8 tests/e2e/converter.spec.ts:159:1 › отмена настоящего Worker, очистка и новая конвертация (8.0s)
+  ✓   9 tests/e2e/converter.spec.ts:171:1 › узкое окно и длинные имена не создают горизонтальный скролл (3.3s)
+  ✓  10 tests/e2e/converter.spec.ts:179:1 › адаптер в production Worker возвращает правильные MIME и сигнатуры (3.3s)
+
+  10 passed (54.8s)
